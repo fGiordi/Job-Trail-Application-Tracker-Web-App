@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 import { JobApplicationForm } from "../components/JobApplicationForm";
@@ -8,24 +8,31 @@ import { StatsCard } from "../components/StatsCard";
 import { ClientOnly } from "../components/ClientOnly";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
-import { 
-  Plus, 
-  Search, 
-  Briefcase, 
-  Clock, 
-  CheckCircle, 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
+import {
+  Plus,
+  Search,
+  Briefcase,
+  Clock,
+  CheckCircle,
   XCircle,
   LayoutGrid,
-  LayoutList
+  LayoutList,
 } from "lucide-react";
 import { Alert, AlertDescription } from "../components/ui/alert";
 
 function JobTrackerContent() {
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [editingApplication, setEditingApplication] = useState<JobApplication | undefined>();
+  const [editingApplication, setEditingApplication] = useState<
+    JobApplication | undefined
+  >();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -55,7 +62,9 @@ function JobTrackerContent() {
     if (editingApplication) {
       setApplications((prev) =>
         prev.map((app) =>
-          app.id === editingApplication.id ? { ...application, id: app.id } : app
+          app.id === editingApplication.id
+            ? { ...application, id: app.id }
+            : app
         )
       );
       setEditingApplication(undefined);
@@ -91,8 +100,11 @@ function JobTrackerContent() {
   // Calculate stats
   const stats = {
     total: applications.length,
-    interviewing: applications.filter((app) => app.status === "interviewing").length,
-    offers: applications.filter((app) => app.status === "offer" || app.status === "accepted").length,
+    interviewing: applications.filter((app) => app.status === "interviewing")
+      .length,
+    offers: applications.filter(
+      (app) => app.status === "offer" || app.status === "accepted"
+    ).length,
     rejected: applications.filter((app) => app.status === "rejected").length,
   };
 
@@ -108,7 +120,9 @@ function JobTrackerContent() {
               </div>
               <div>
                 <h1>Job Tracker</h1>
-                <p className="text-muted-foreground text-sm">Manage your job applications</p>
+                <p className="text-muted-foreground text-sm">
+                  Manage your job applications
+                </p>
               </div>
             </div>
             <Button onClick={() => setIsFormOpen(true)}>
@@ -210,7 +224,8 @@ function JobTrackerContent() {
           <Alert>
             <Search className="h-4 w-4" />
             <AlertDescription>
-              No applications match your search criteria. Try adjusting your filters.
+              No applications match your search criteria. Try adjusting your
+              filters.
             </AlertDescription>
           </Alert>
         ) : (
@@ -237,7 +252,9 @@ function JobTrackerContent() {
       <JobApplicationForm
         isOpen={isFormOpen}
         onClose={closeForm}
-        onSubmit={editingApplication ? handleEditApplication : handleAddApplication}
+        onSubmit={
+          editingApplication ? handleEditApplication : handleAddApplication
+        }
         initialData={editingApplication}
         mode={editingApplication ? "edit" : "add"}
       />
@@ -260,7 +277,9 @@ export default function Home() {
                   </div>
                   <div>
                     <h1>Job Tracker</h1>
-                    <p className="text-muted-foreground text-sm">Manage your job applications</p>
+                    <p className="text-muted-foreground text-sm">
+                      Manage your job applications
+                    </p>
                   </div>
                 </div>
                 <Button disabled>
